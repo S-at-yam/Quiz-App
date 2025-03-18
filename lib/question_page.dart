@@ -11,6 +11,14 @@ class QuestionPage extends StatefulWidget {
 class _QuestionPageState extends State<QuestionPage> {
   @override
   Widget build(context) {
-    return Center(child: Text('QuestionPage'));
+    return Center(
+      child: Column(
+        children: [
+          Text('Question'),
+          const SizedBox(height: 30),
+          AnswerButton(),
+        ],
+      ),
+    );
   }
 }
