@@ -12,9 +12,17 @@ class QuestionPage extends StatefulWidget {
 }
 
 class _QuestionPageState extends State<QuestionPage> {
+  var curQuesIndex = 0;
+  void nextQues() {
+    setState(() {
+      curQuesIndex++;
+    });
+  }
+
   @override
   Widget build(context) {
-    final QuizQuestion curQues = questions[0];
+    final QuizQuestion curQues = questions[curQuesIndex];
+    List<String> options = curQues.getShuffledList();
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -27,8 +35,8 @@ class _QuestionPageState extends State<QuestionPage> {
             ),
           ),
           const SizedBox(height: 30),
-          ...curQues.answers.map((item) {
-            return AnswerButton(item, () {});
+          ...options.map((item) {
+            return AnswerButton(item, nextQues);
           }),
         ],
       ),

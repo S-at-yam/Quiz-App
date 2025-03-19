@@ -21,7 +21,11 @@ class AnswerButton extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
         ),
 
-        child: Text(text, style: TextStyle(fontSize: 17)),
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 17),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
