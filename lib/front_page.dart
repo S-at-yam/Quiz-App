@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FrontPage extends StatelessWidget {
   const FrontPage(this.switchScreen, {super.key});
@@ -18,10 +19,9 @@ class FrontPage extends StatelessWidget {
           const SizedBox(height: 40),
           Text(
             'Learn Flutter the fun way!',
-            style: TextStyle(
+            style: GoogleFonts.merriweather(
+              color: const Color.fromARGB(190, 127, 148, 218),
               fontSize: 20,
-              color: Colors.yellow,
-              decoration: TextDecoration.none,
             ),
           ),
           const SizedBox(height: 20),

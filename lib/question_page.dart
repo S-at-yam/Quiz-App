@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_app/answer_button.dart';
 import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/models/quiz_questions.dart';
 
 class QuestionPage extends StatefulWidget {
-  const QuestionPage({super.key});
+  const QuestionPage(this.onSelectAnswer, {super.key});
+  final void Function(String answer) onSelectAnswer;
   @override
   State<QuestionPage> createState() {
     return _QuestionPageState();
@@ -13,7 +15,8 @@ class QuestionPage extends StatefulWidget {
 
 class _QuestionPageState extends State<QuestionPage> {
   var curQuesIndex = 0;
-  void nextQues() {
+  void nextQues(String selectedAnswer) {
+    widget.onSelectAnswer(selectedAnswer);
     setState(() {
       curQuesIndex++;
     });
@@ -31,12 +34,17 @@ class _QuestionPageState extends State<QuestionPage> {
             width: MediaQuery.of(context).size.width * 0.8,
             child: Text(
               curQues.text,
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: GoogleFonts.merriweather(
+                color: Colors.white,
+                fontSize: 20,
+              ),
             ),
           ),
           const SizedBox(height: 30),
           ...options.map((item) {
-            return AnswerButton(item, nextQues);
+            return AnswerButton(item, () {
+              nextQues(item);
+            });
           }),
         ],
       ),
