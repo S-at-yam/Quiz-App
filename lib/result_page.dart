@@ -3,9 +3,10 @@ import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/summary_page.dart';
 
 class ResultPage extends StatelessWidget {
-  const ResultPage(this.chosenAnswers, {super.key});
+  const ResultPage(this.chosenAnswers, this.restart, {super.key});
 
   final List<String> chosenAnswers;
+  final void Function() restart;
 
   List<Map<String, Object>> getSummaryData() {
     final List<Map<String, Object>> summary = [];
@@ -33,11 +34,35 @@ class ResultPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Answered $numcorrectQues out of $numQues questions correctly!'),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+          Text(
+            'Answered $numcorrectQues out of $numQues questions correctly!',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 25,
+              decoration: TextDecoration.underline,
+            ),
+            textAlign: TextAlign.center,
+          ),
           const SizedBox(height: 30),
           SummaryPage(summaryData),
           const SizedBox(height: 30),
-          TextButton(onPressed: () {}, child: Text('Restart the quiz')),
+          Expanded(
+            child: Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: TextButton.icon(
+                onPressed: () {
+                  restart();
+                },
+                icon: Icon(Icons.restart_alt, color: Colors.white, size: 30),
+                label: Text(
+                  'Restart the quiz',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.1),
         ],
       ),
     );
